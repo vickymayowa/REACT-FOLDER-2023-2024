@@ -10,38 +10,13 @@ const Form = () => {
   });
 
   const handleDelete = (index) => {
-    // Delete the user data for the given index
     userData.splice(index, 1);
     setUserData([...userData]);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch('https://localhost:5000/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-      console.log(response)
-  
-      if (response.ok) {
-        // Data was successfully sent to the server
-        // You can handle success actions here
-      console.log(response);
-        console.log( "Data was successfully sent to the server");
-      } else {
-        // Handle the case where the server returned an error
-        console.error('Failed to save user data to MongoDB');
-      }
-    } catch (error) {
-      console.error('An error occurred while sending the data:', error);
-    }
-    // Add the current form data to the userData array
     setUserData([...userData, formData]);
-    // Reset the form fields
     setTimeout(() => {
       setFormData({
         name: '',
@@ -112,11 +87,6 @@ const Form = () => {
             <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
               Password
             </label>
-            <div className="text-sm">
-              <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                Forgot password?
-              </a>
-            </div>
           </div>
           <div className="mt-2">
             <input
