@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
 import axios from 'axios';
 
-
-const Fetch = () => {
+const UserTable = () => {
   const [users, setUsers] = useState([]);
-    const fetchData =()=>{
-        fetch("https://jsonplaceholder.typicode.com/users")
-        .then(res=>res.json())
-        .then(data=>console.log(data))
-    }
+
+  useEffect(() => {
+    axios.get('https://jsonplaceholder.typicode.com/users')
+      .then((response) => {
+        setUsers(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
   return (
-    <>
-  <div>
+    <div>
       <table className="min-w-full divide-y divide-gray-200">
         <thead>
           <tr>
@@ -44,10 +47,7 @@ const Fetch = () => {
         </tbody>
       </table>
     </div>
-     <button className="flex justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={fetchData} > Get data</button>
-    <button>Hello world</button>
-    </>
-  )
-}
+  );
+};
 
-export default Fetch
+export default UserTable;
