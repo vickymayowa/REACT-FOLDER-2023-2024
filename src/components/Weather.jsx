@@ -1,25 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const Weather = () => {
-  const [userInput, setUserInput] = useState('');
+  const [userInput, setUserInput] = useState("");
   const [weatherData, setWeatherData] = useState(null);
 
-  const gen = async () => {
-    const apiKey = '8f9442cc962b60a665deb4d7dfa99529';
-    const endPoint = `https://api.openweathermap.org/data/2.5/weather?q=${userInput}&appid=${apiKey}&units=metric`;
+  // const addcity = async () => {
+  //   const apiKey = "8f9442cc962b60a665deb4d7dfa99529";
+  //   const endPoint = `https://api.openweathermap.org/data/2.5/weather?q=${userInput}&appid=${apiKey}&units=metric`;
 
-    try {
-      const response = await fetch(endPoint);
-      const data = await response.json();
-      setWeatherData(data);
-    } catch (error) {
-      console.error(error.message);
-    }
-  };
+  //   try {
+  //     const response = await fetch(endPoint);
+  //     const data = await response.json();
+  //     setWeatherData(data);
+  //   } catch (error) {
+  //     console.error(`Try again ${error.message}`);
+  //   }
+  // };
 
-  useEffect(() => {
-    gen();
-  }, [userInput]);
+  // useEffect(() => {
+  //   addcity();
+  // }, [userInput]);
+  const Checkapp = ()=>{
+    const apiKey = "8f9442cc962b60a665deb4d7dfa99529";
+    axios.post(`https://api.openweathermap.org/data/2.5/weather?q=${userInput}&appid=${apiKey}&units=metric`)
+    .then(function(response) {
+      console.log(response);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+  
+  }
 
   return (
     <>
@@ -34,43 +46,117 @@ const Weather = () => {
               onChange={(e) => setUserInput(e.target.value)}
               className="form-control"
             />
-          </div>
-        </div>
-        {weatherData && (
-          <section className="semi-text" style={{ fontSize: '35px' }}>
-            <h3 className="text-white fw-lighter" style={{ fontSize: 'sans-serif', fontFamily: 'Verdana, Geneva, Tahoma, sans-serif' }}>{weatherData.main.temp}°C</h3>
-            <h6 className="fw-lighter text-white" style={{ fontSize: '30px' }}>{weatherData.name}, {weatherData.sys.country}</h6>
-            <span>{weatherData.weather[0].main}</span>
-          </section>
-        )}
-        <div className="section2">
-          <div className="weather-details mt-4 fw-lighter text-white" style={{ fontSize: '35px', fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, sans-serif' }}>
-            Weather Details
-          </div>
-          <div className="text-area fw-lighter rounded-3" style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, sans-serif' }}>
-            <ul style={{ listStyle: 'none', fontSize: '35px' }}>
-              <li className="text-start">Description<span className="float-end ms-2">{weatherData.weather[0].main}</span></li>
-              <li className="text-start">Location<span className="float-end">{weatherData.name}</span></li>
-              <li className="text-start">Humidity<span className="float-end">{weatherData.main.humidity}%</span></li>
-              <li className="text-start">Wind<span className="float-end">{weatherData.wind.speed}m/s</span></li>
-            </ul>
-            <hr />
-          </div>
-          <div className="text-area fw-lighter rounded-3" style={{ fontFamily: 'system-ui, -apple-system, BlinkMacSystemFont, sans-serif' }}>
-            <ul style={{ listStyle: 'none', fontSize: '35px' }}>
-              <li className="text-start">Min<span className="float-end">{weatherData.main.temp_min}°C</span></li>
-              <li className="text-start">Max<span className="float-end">{weatherData.main.temp_max}°C</span></li>
-              <li className="text-start">Feels<span className="float-end">{weatherData.main.feels_like}°C</span></li>
-              <li className="text-start">Pressure<span className="float-end">{weatherData.main.pressure}hPa</span></li>
-            </ul>
+          <button className="bg-green-500 mt-5 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={Checkapp}>
+            Check weather app
+          </button>
+
           </div>
         </div>
       </div>
-      <section className="profile-tags" style={{ color: 'black' }}>
-        <footer className="float-end me-3 fw-lighter text-center" style={{ marginTop: '100px', fontFamily: 'Gill Sans, Calibri, Trebuchet MS, sans-serif' }}>
-          Designed by <a href="https://www.linkedin.com/in/adebanjo-favour-217b1a251/" className="text-dark">VickyWebDeveloper</a>
+        {/* {weatherData && (
+          <section className="semi-text" style={{ fontSize: "35px" }}>
+            <h3
+              className="text-white fw-lighter"
+              style={{
+                fontSize: "sans-serif",
+                fontFamily: "Verdana, Geneva, Tahoma, sans-serif",
+              }}
+            >
+              {weatherData.main.temp}°C
+            </h3>
+            <h6 className="fw-lighter text-white" style={{ fontSize: "30px" }}>
+              {weatherData.name}, {weatherData.sys.country}
+            </h6>
+            <span>{weatherData.weather[0].main}</span>
+          </section>
+        )} */}
+        {/* <div className="section2">
+          <div
+            className="weather-details mt-4 fw-lighter text-white"
+            style={{
+              fontSize: "35px",
+              fontFamily:
+                "system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
+            }}
+          >
+            Weather Details
+          </div>
+          <div
+            className="text-area fw-lighter rounded-3"
+            style={{
+              fontFamily:
+                "system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
+            }}
+          >
+            <ul style={{ listStyle: "none", fontSize: "35px" }}>
+              <li className="text-start">
+                Description
+                <span className="float-end ms-2">
+                  {weatherData.weather[0].main}
+                </span>
+              </li>
+              <li className="text-start">
+                Location<span className="float-end">{weatherData.name}</span>
+              </li>
+              <li className="text-start">
+                Humidity
+                <span className="float-end">{weatherData.main.humidity}%</span>
+              </li>
+              <li className="text-start">
+                Wind
+                <span className="float-end">{weatherData.wind.speed}m/s</span>
+              </li>
+            </ul>
+            <hr />
+          </div>
+          <div
+            className="text-area fw-lighter rounded-3"
+            style={{
+              fontFamily:
+                "system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
+            }}
+          >
+            <ul style={{ listStyle: "none", fontSize: "35px" }}>
+              <li className="text-start">
+                Min
+                <span className="float-end">{weatherData.main.temp_min}°C</span>
+              </li>
+              <li className="text-start">
+                Max
+                <span className="float-end">{weatherData.main.temp_max}°C</span>
+              </li>
+              <li className="text-start">
+                Feels
+                <span className="float-end">
+                  {weatherData.main.feels_like}°C
+                </span>
+              </li>
+              <li className="text-start">
+                Pressure
+                <span className="float-end">
+                  {weatherData.main.pressure}hPa
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div> */}
+      {/* <section className="profile-tags" style={{ color: "black" }}>
+        <footer
+          className="float-end me-3 fw-lighter text-center"
+          style={{
+            marginTop: "100px",
+            fontFamily: "Gill Sans, Calibri, Trebuchet MS, sans-serif",
+          }}
+        >
+          Designed by{" "}
+          <a
+            href="https://www.linkedin.com/in/adebanjo-favour-217b1a251/"
+            className="text-dark"
+          >
+            VickyWebDeveloper
+          </a>
         </footer>
-      </section>
+      </section> */}
     </>
   );
 };

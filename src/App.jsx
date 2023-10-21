@@ -1,28 +1,12 @@
 import React from "react";
 import "./App.css";
-import Weather from "./components/Weather";
-// import Facts from "./components/Facts";
-// import Github from "./components/Github";
-// import EventHanding from "./components/EventHanding";
-// import Form from "./components/Form";
-// import Fetch from "./components/Fetch";
-// import UserTable from "./components/UserTable";
-// import DemoForm from "./components/DemoForm";
-// import AssMap from "./components/AssMap";
+import SendForm from "./components/SendForm";
 
 function App() {
 
   return (
     <>
-    {/* <AssMap />  */}
-    {/* <EventHanding /> */}
-    {/* <Form /> */}
-    {/* <UserTable /> */}
-    {/* <Github /> */}
-    {/* <Facts /> */}
-    {/* <Fetch /> */}
-    {/* <DemoForm /> */}
-    <Weather />
+    <SendForm />
     </>
   );
 }
