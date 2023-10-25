@@ -18,23 +18,35 @@ const SendForm = () => {
       });
     };
   
-    const handleButtonClick = () => {
-      console.log('User Data:', userData);
+    const handleButtonClick = () => { 
+      if (userData.fullname === "" || userData.email === "" || userData.username === "" ||  userData.password === "") {
+        errmsg.className="mt-10 text-center text-red-700"
+        errmsg.innerHTML = "Fill In the Fields"
+        setTimeout(() => {
+        errmsg.innerHTML = ""
+        }, 2000);
+      } else {
+       console.log('User Data:', userData);
+       errmsg.className="mt-10 text-center text-green-700"
+       errmsg.innerHTML = "Register SuccessFully"
+       setTimeout(() => {
+        errmsg.innerHTML = ""
+        }, 2000);
       axios.post('http://localhost:5000', userData)
       .then(response => {
         console.log('Data sent successfully:', response.data);
       })
       .catch(error => {
         console.error('Error sending data:', error);
-      });
-
-
+      }); 
+      }
     };
   return (
     <>
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
+          // purity-ui
             className="mx-auto h-40 w-auto"
             src="https://imgs.search.brave.com/4dRKH9Sw5uh1djyzBAPbaVuSSKa7oN0-MqWQbA2krCo/rs:fit:500:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA0LzkyLzU1LzE1/LzM2MF9GXzQ5MjU1/MTU0Ml9VaUFvSDBE/eWhMMVpISDlUMjRt/YXNDUVpCYTk1RHlX/MS5qcGc"
             alt="Your Company"
@@ -43,7 +55,9 @@ const SendForm = () => {
            Register your account
           </h2>
         </div>
-
+        <h2 id='errmsg' className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+           
+          </h2>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="space-y-6" action="#" method="POST">
             <div>
@@ -130,7 +144,7 @@ const SendForm = () => {
           </form>
 
           <p className="mt-10 text-center text-sm text-gray-500">
-            Not a member?{' '}
+            Already a member?{' '}
             <a href="#" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
               Start a 14 day free trial
             </a>
