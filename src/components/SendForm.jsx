@@ -32,7 +32,8 @@ const SendForm = () => {
        setTimeout(() => {
         errmsg.innerHTML = ""
         }, 2000);
-      axios.post('http://localhost:5000', userData)
+      axios.post('http://localhost:5000/api/register', userData)
+      
       .then(response => {
         console.log('Data sent successfully:', response.data);
       })
