@@ -1,14 +1,35 @@
 import React, { useState } from 'react'
+import axios from 'axios';
 
 const SendForm = () => {
     const [userData, setUserData] = useState({
-        fullName: '',
+        fullname: '',
         email: '',
         username: '',
+        password : '',
+
     });
-    const submitData = ()=>{
-        
-    }
+    
+    const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setUserData({
+        ...userData,
+        [name]: value,
+      });
+    };
+  
+    const handleButtonClick = () => {
+      console.log('User Data:', userData);
+      axios.post('http://localhost:5000', userData)
+      .then(response => {
+        console.log('Data sent successfully:', response.data);
+      })
+      .catch(error => {
+        console.error('Error sending data:', error);
+      });
+
+
+    };
   return (
     <>
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -36,7 +57,8 @@ const SendForm = () => {
                   type="text"
                   autoComplete="fullname"
                   required
-                  onChange={(e) => setFullName(e.target.value)}
+                  value={userData.fullname}
+                 onChange={handleInputChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -53,6 +75,8 @@ const SendForm = () => {
                   autoComplete="email"
                   required
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  value={userData.email}
+                 onChange={handleInputChange}
                 />
               </div>
             </div>
@@ -67,6 +91,8 @@ const SendForm = () => {
                   type="text"
                   autoComplete="username"
                   required
+                  value={userData.username}
+                  onChange={handleInputChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -85,19 +111,21 @@ const SendForm = () => {
                   type="password"
                   autoComplete="current-password"
                   required
+                  value={userData.password}
+                  onChange={handleInputChange}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
 
             <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                onClick={submitData}
-              >
-                Sign in
-              </button>
+            <button
+            type="button"
+            onClick={handleButtonClick}
+            className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          >
+            Sign up
+          </button>
             </div>
           </form>
 
