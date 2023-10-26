@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const SendForm = () => {
     const [userData, setUserData] = useState({
@@ -20,25 +21,14 @@ const SendForm = () => {
   
     const handleButtonClick = () => { 
       if (userData.fullname === "" || userData.email === "" || userData.username === "" ||  userData.password === "") {
-        errmsg.className="mt-10 text-center text-red-700"
-        errmsg.innerHTML = "Fill In the Fields"
-        setTimeout(() => {
-        errmsg.innerHTML = ""
-        }, 2000);
+       toast("Fill In the Fields")
       } else {
-       console.log('User Data:', userData);
-       errmsg.className="mt-10 text-center text-green-700"
-       errmsg.innerHTML = "Register SuccessFully"
-       setTimeout(() => {
-        errmsg.innerHTML = ""
-        }, 2000);
-      axios.post('http://localhost:5000/api/register', userData)
-      
+       axios.post('http://localhost:5000/api/register', userData)
       .then(response => {
-        console.log('Data sent successfully:', response.data);
+        toast(response.data.message)
       })
       .catch(error => {
-        console.error('Error sending data:', error);
+        toast(error.data.message)
       }); 
       }
     };
