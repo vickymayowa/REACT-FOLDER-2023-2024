@@ -3,9 +3,8 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
-const SendForm = () => {
-  const navigate = useNavigate();
-
+const Register = () => {
+    const navigate = useNavigate();
     const [userData, setUserData] = useState({
         fullname: '',
         email: '',
@@ -29,10 +28,7 @@ const SendForm = () => {
        axios.post('http://localhost:5000/api/register', userData)
       .then(response => {
         toast(response.data.message)
-        // setTimeout(() => {
-          navigate('/login');
-          alert("Hello world ")
-        // }, 2000);
+        navigate('/SignIn')
       })
       .catch(error => {
         toast("Unable to Register")
@@ -42,7 +38,7 @@ const SendForm = () => {
     };
   return (
     <>
-    <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
           // purity-ui
@@ -141,10 +137,9 @@ const SendForm = () => {
           </button>
             </div>
           </form>
-
-          <p className="mt-10 text-center text-sm text-gray-500">
+            <p className="mt-10 text-center text-sm text-gray-500">
             Already a member?{' '}
-            <a to='/login'>Login here </a>
+            <a to='/SignIn'>Login here </a>
           </p>
         </div>
       </div>
@@ -152,4 +147,4 @@ const SendForm = () => {
   )
 }
 
-export default SendForm
+export default Register
