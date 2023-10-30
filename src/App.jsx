@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Register from "./components/pages/Register";
 import SignIn from "./components/pages/SignIn";
 import Formik from "./components/pages/Formik";
+import Valid from "./components/pages/Valid";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
       <Route path="/form" element={<Form/>}/>
       <Route path="*" element={<Errorpage/>}/>
       <Route path="/formik" element={<Formik/>}/>
+      <Route path="/Valid" element={<Valid/>}/>
     </Routes>
     <ToastContainer 
     position="top-center"

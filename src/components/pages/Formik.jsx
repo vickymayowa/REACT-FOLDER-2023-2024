@@ -1,24 +1,28 @@
 import React from "react";
-// import { useFormik } from 'formik'
+import { useFormik } from 'formik'
 
 const Formik = () => {
-  // const formik = useFormik({
-  // intialValues:{
-  // firstname:""
-  // lastname:""
-  // email:""
-  // password:""
-  // }
-  // })
+  const formik = useFormik({
+  initialValues:{
+  firstname:"",
+  lastname:"",
+  email:"",
+  password:"",
+  },
+  onSubmit:(values)=>{
+    console.log(values);
+  }
+}
+)
   return (
     <>
       <div>
         <div className="flex items-center justify-center flex-col">
-          <form action="" onSubmit={formik.handleSubmit}>
+          <form onSubmit={formik.handleSubmit}>
             <input
               type="text"
               name="firstname"
-              value={formik.value.firstname}
+              value={formik.values.firstname}
               onChange={formik.handleChange}
               placeholder="Enter your FirstName"
               className="border rounded-md p-3"
@@ -26,7 +30,7 @@ const Formik = () => {
             <input
               type="text"
               name="lastname"
-              value={formik.value.lastname}
+              value={formik.values.lastname}
               onChange={formik.handleChange}
               placeholder="Enter your LastName"
               className="border rounded-md p-3"
@@ -34,7 +38,7 @@ const Formik = () => {
             <input
               type="text"
               name="email"
-              value={formik.value.email}
+              value={formik.values.email}
               onChange={formik.handleChange}
               placeholder="Enter your Email"
               className="border rounded-md p-3"
@@ -42,12 +46,14 @@ const Formik = () => {
             <input
               type="text"
               name="password"
-              value={formik.value.password}
+              value={formik.values.password}
               onChange={formik.handleChange}
               placeholder="Enter your Password"
               className="border rounded-md p-3"
             />
-            <button className="bg-blue-400 rounded-lg text-white p-4 my-3 w-60">
+            <button 
+            type="submit"
+            className="bg-blue-400 rounded-lg text-white p-4 my-3 w-60">
               Submit
             </button>
           </form>
