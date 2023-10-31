@@ -22,7 +22,6 @@ const SignIn = () => {
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
-          // purity-ui
             className="mx-auto h-40 w-auto"
             src="https://imgs.search.brave.com/4dRKH9Sw5uh1djyzBAPbaVuSSKa7oN0-MqWQbA2krCo/rs:fit:500:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA0LzkyLzU1LzE1/LzM2MF9GXzQ5MjU1/MTU0Ml9VaUFvSDBE/eWhMMVpISDlUMjRt/YXNDUVpCYTk1RHlX/MS5qcGc"
             alt="Your Company"

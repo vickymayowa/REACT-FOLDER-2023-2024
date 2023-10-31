@@ -11,6 +11,7 @@ import Register from "./components/pages/Register";
 import SignIn from "./components/pages/SignIn";
 import Formik from "./components/pages/Formik";
 import Valid from "./components/pages/Valid";
+import Dashboard from "./components/pages/Dashboard";
 
 function App() {
 
@@ -24,6 +25,8 @@ function App() {
       <Route path="*" element={<Errorpage/>}/>
       <Route path="/formik" element={<Formik/>}/>
       <Route path="/Valid" element={<Valid/>}/>
+      <Route path="/dashboard" element={<Dashboard/>}/>
+
     </Routes>
     <ToastContainer 
     position="top-center"
