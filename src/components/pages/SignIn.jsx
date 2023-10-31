@@ -1,21 +1,24 @@
 import React from 'react'
+import { toast } from 'react-toastify';
 
 const SignIn = () => {
-  const [userData, setUserData] = useState({
-    username: '',
-    password : '',
-  });
+  const [email, setemail] = useState('')
+  const [password, setpassword] = useState('')
 
   const handleButtonClick = ()=>{
-    console.log("Access The input")
-  }
-  const handleInputChange = (e)=>{
-    const { name, value } = e.target;
-    console.log("Access The input")
-    setUserData({
-      ...userData,
-      [name]: value,
-    });
+   axios.post("http://localhost:5000/api/login",{
+    email,
+    password,
+   })
+   .then((response)=>{
+    if (response.data.status) {
+      console.log(response.data.message);
+      toast(response.data.message)
+    }else{
+      console.log(`Wrong Credentails`);
+      toast(response.data.message)
+    }
+   })
   }
   return (
     <>
@@ -37,7 +40,7 @@ const SignIn = () => {
           <form>
             <div>
               <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                UserName
+                Email
               </label>
               <div className="mt-2">
                 <input
@@ -46,8 +49,8 @@ const SignIn = () => {
                   type="text"
                   autoComplete="username"
                   required
-                  value={userData.username}
-                  onChange={handleInputChange}
+                  // value={userData.email}
+                  onChange={(e)=>setemail(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
@@ -66,8 +69,8 @@ const SignIn = () => {
                   type="password"
                   autoComplete="current-password"
                   required
-                  value={userData.password}
-                  onChange={handleInputChange}
+                  // value={userData.password}
+                  onChange={(e)=>setpassword(e.target.value)}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
