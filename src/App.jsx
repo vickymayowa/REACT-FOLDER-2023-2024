@@ -25,8 +25,7 @@ function App() {
       <Route path="*" element={<Errorpage/>}/>
       <Route path="/formik" element={<Formik/>}/>
       <Route path="/Valid" element={<Valid/>}/>
-      <Route path="/dashboard" element={<Dashboard/>}/>
-
+      <Route path="/dashboard" element={<Dashboard/>}/>      
     </Routes>
     <ToastContainer 
     position="top-center"
