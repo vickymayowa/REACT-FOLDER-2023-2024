@@ -14,7 +14,20 @@ import Valid from "./components/pages/Valid";
 import Dashboard from "./components/pages/Dashboard";
 
 function App() {
-
+  useEffect(() => {
+    if ("ServiceWorker" in navigator) {
+      window.addEventListener("load",()=>{
+        navigator.serviceWorker.register("/sw.js")
+        .then(()=>{
+          console.log("SW Registered:",registration);
+        })
+        .catch(()=>{
+          console.log("SW registration Failed:", registrationError);
+        })
+      }) 
+    }
+  }, [])
+  
   return (
     <>
     <Routes>
